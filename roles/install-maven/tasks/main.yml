@@ -1,39 +1,42 @@
----
-# tasks file for install-maven
-
-- name: create maven directory
-  file:
-    path: /opt/apache-maven-3.3.9
-    state: directory
-   
-- name: Downloading Maven Binaries
-
-  get_url:
-
-    url: http://apache.mirror.digitalpacific.com.au/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
-
-    dest: '/opt/apache-maven-3.3.9-bin.tar.gz'
-
-
-
-- name: Unarchive Maven Binaries
-
-  unarchive:
-
-    src: '/opt/apache-maven-3.3.9-bin.tar.gz'
-
-    dest: '/opt/apache-maven-3.3.9'
-
-    copy: no
-
-- name: Install maven
-  command: 'sudo update-alternatives --install /usr/bin/mvn maven /opt/apache-maven-3.3.9/bin/mvn 1001'
-
-- name: Cleaning Up
-
-  file:
-
-    state: absent
-
-    path: '/opt/apache-maven-3.3.9-bin.tar.gz'
-
+-
+    name: 'create maven directory'
+    file:
+        path: /opt/apache-maven-3.3.9
+        state: directory
+-
+    name: 'Downloading Maven Binaries'
+    get_url:
+        url: 'http://apache.mirror.digitalpacific.com.au/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz'
+        dest: /opt/apache-maven-3.3.9-bin.tar.gz
+-
+    name: 'Unarchive Maven Binaries'
+    unarchive:
+        src: /opt/apache-maven-3.3.9-bin.tar.gz
+        dest: /opt/apache-maven-3.3.9
+        copy: no
+-
+    name: 'Create maven symlink to /usr/bin'
+    file:
+        src: /opt/apache-maven-3.3.9/bin/mvn
+        dest: /usr/bin/mvn
+        state: link
+-
+    name: 'Configure maven and its environment variables'
+    lineinfile:
+        dest: /etc/profile.d/maven.sh
+        line: '{{ item.line }}'
+        create: yes
+        state: present
+    with_items:
+        -
+            line: M2_HOME=/opt/apache-maven-3.3.9
+        -
+            line: 'PATH=$PATH:$M2_HOME/bin'
+-
+    name: 'Exports/Run maven env file for make M2_HOME available globally'
+    shell: 'source /etc/profile.d/maven.sh'
+-
+    name: 'Cleaning Up'
+    file:
+        state: absent
+        path: /opt/apache-maven-3.3.9-bin.tar.gz
