@@ -50,9 +50,6 @@
             owner: tomcat
             mode: "u+rwx,g+r,o=g+x"
             recurse: yes
-    -
-        name: 'chown temp logs'
-        command: 'sudo chown -R tomcat webapps/work/temp/logs/'
           
     -
         name: 'copy tomcat.service file to remote'
