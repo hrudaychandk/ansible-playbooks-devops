@@ -12,7 +12,7 @@
     name: 'Unarchive Maven Binaries'
     unarchive:
         src: /opt/apache-maven-3.3.9-bin.tar.gz
-        dest: /opt
+        dest: /opt/apache-maven-3.3.9
         copy: no
 -
     name: 'Create maven symlink to /usr/bin'
@@ -21,7 +21,12 @@
         dest: /usr/bin/mvn
         state: link
 -
-    name: 'Configure maven and its environment variables'
+    name: 'Remove old path configuration'
+    file:
+        path: /etc/profile.d/maven.sh
+        state: absent
+-
+    name: 'Maven path configuration'
     lineinfile:
         dest: /etc/profile.d/maven.sh
         line: '{{ item.line }}'
@@ -32,9 +37,6 @@
             line: M2_HOME=/opt/apache-maven-3.3.9
         -
             line: 'PATH=$PATH:$M2_HOME/bin'
--
-    name: 'Exports/Run maven env file for make M2_HOME available globally'
-    shell: 'source /etc/profile.d/maven.sh'
 -
     name: 'Cleaning Up'
     file:
