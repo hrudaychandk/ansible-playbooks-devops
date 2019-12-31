@@ -26,37 +26,8 @@
 
     copy: no
 
-
-
-- name: Remove old path configuration
-
-  file:
-
-    path: /etc/profile.d/maven.sh
-
-    state: absent
-
-
-
-- name: Maven path configuration
-
-  lineinfile:
-
-    dest: /etc/profile.d/maven.sh
-
-    line: '{{ item.line }}'
-
-    create: yes
-
-    state: present
-
-  with_items:
-
-    - { line: 'M2_HOME=/opt/apache-maven-3.3.9' }
-
-    - { line: 'PATH=$PATH:$M2_HOME/bin' }
-
-
+- name: Install maven
+  command: 'sudo update-alternatives --install /usr/bin/mvn maven /opt/apache-maven-3.3.9/bin/mvn 1001'
 
 - name: Cleaning Up
 
