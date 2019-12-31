@@ -48,7 +48,7 @@
             path: /opt/tomcat
             group: tomcat
             owner: tomcat
-            mode: "u+rwx,g+r,o=g+x"
+            mode: g=rX
             recurse: yes
           
     -
