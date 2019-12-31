@@ -48,7 +48,7 @@
             path: /opt/tomcat
             group: tomcat
             owner: tomcat
-            mode: g=rX
+            mode: "u+rwx,g+rx,o=rx"
             recurse: yes
     -
         name: 'copy tomcat.service file to remote'
@@ -60,13 +60,10 @@
         name: 'reload daemon'
         systemd:
             daemon_reload: yes
-            owner: tomcat
-            group: tomcat
+            
     -
         name: restart tomcat
         systemd:
             name: tomcat
             state: restarted
             enabled: yes
-            owner: tomcat
-            group: tomcat
