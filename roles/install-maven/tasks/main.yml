@@ -1,6 +1,11 @@
 ---
 # tasks file for install-maven
 
+- name: create maven directory
+    file:
+      path: /opt/apache-maven-3.3.9
+      state: directory
+   
 - name: Downloading Maven Binaries
 
   get_url:
