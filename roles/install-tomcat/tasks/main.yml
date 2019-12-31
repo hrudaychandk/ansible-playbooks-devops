@@ -60,4 +60,8 @@
         systemd:
             daemon_reload: yes
     -
-        name: "restart tomcat\nsystemd:\n name: tomcat\n state: restarted\n enabled: yes"
+        name: restart tomcat
+        systemd:
+            name: tomcat
+            state: restarted
+            enabled: yes
