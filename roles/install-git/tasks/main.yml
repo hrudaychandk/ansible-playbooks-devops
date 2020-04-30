@@ -3,6 +3,4 @@
 - name: Install git
   apt:
     name: git
-    state: absent
-
- 
+    state: present
