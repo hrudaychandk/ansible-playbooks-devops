@@ -1,0 +1,12 @@
+
+- hosts: test-servers
+
+  remote_user: ubuntu
+
+  become: yes
+
+  become_method: sudo
+
+  roles:
+
+    - install-git                           
