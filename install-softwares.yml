@@ -9,4 +9,5 @@
 
   roles:
 
-    - install-git                           
+    - install-git
+    - install-jenkins                       
