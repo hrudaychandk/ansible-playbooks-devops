@@ -11,4 +11,5 @@
 
     - install-git
     - install-jenkins                      
-    - install-gradle 
+    - install-gradle
+    - install-docker 
