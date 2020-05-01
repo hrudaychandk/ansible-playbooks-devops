@@ -1,0 +1,43 @@
+---
+# tasks file for install-gradle
+  - name: "Install unzip"
+
+    package:
+
+      name: unzip
+
+      state: latest
+
+
+
+  - name: "Download gradle"
+
+    get_url:
+
+      url: "{{ gradle_download_url }}"
+
+      dest: "{{ gradle_download }}"
+
+
+
+  - name: "Extract Gradle {{ gradle_version }}"
+
+    unarchive:
+
+      src: "{{ gradle_download }}"
+
+      dest: "{{ gradle_base_dir }}"
+
+      remote_src: True
+
+
+
+  - name: "Add gradle symlink to path"
+
+    file:
+
+      src: "{{ gradle_base_dir }}/{{ gradle_extract_dir }}/bin/gradle"
+
+      dest: "{{ gradle_link }}"
+
+      state: link

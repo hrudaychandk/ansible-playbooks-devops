@@ -10,4 +10,5 @@
   roles:
 
     - install-git
-    - install-jenkins                       
+    - install-jenkins                      
+    - install-gradle 
