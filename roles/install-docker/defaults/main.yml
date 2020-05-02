@@ -1,6 +1,5 @@
 ---
 # defaults file for install-docker
----
 # Edition can be one of: 'ce' (Community Edition) or 'ee' (Enterprise Edition).
 docker_edition: 'ce'
 docker_package: "docker-{{ docker_edition }}"
