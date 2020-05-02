@@ -1,0 +1,49 @@
+---
+# tasks file for install-sonarqube
+    - name: Install java jdk
+
+      apt:
+
+        pkg: default-jdk
+
+        state: present  
+
+    - name: Install unzip
+
+      package:
+
+        name: unzip
+
+        state: latest
+
+    - name: Download sonarqube binary
+
+      shell:
+
+        cmd: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-6.7.6.zip
+
+        chdir: tmp/
+
+    - name: Unzip sonarqube binary
+
+      shell:
+
+        cmd: unzip sonarqube-6.7.6.zip
+
+        chdir: tmp/
+
+    - name: Move unzipped sonarqube to /opt
+
+      shell:
+
+        cmd: mv sonarqube-6.7.6 /opt
+
+        chdir: tmp/
+
+    - name: start sonar
+
+      shell:
+
+        cmd: ./sonar.sh start
+
+        chdir: opt/sonarqube-6.7.6/bin/linux-x86-64/

@@ -13,3 +13,4 @@
     - install-jenkins                      
     - install-gradle
     - install-docker 
+    - install-sonarqube
