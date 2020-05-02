@@ -6,7 +6,6 @@
       - docker
       - docker-engine
     state: absent
-
 - name: Ensure dependencies are installed.
   apt:
     name:
@@ -50,4 +49,3 @@
     name: docker
     state: "{{ docker_service_state }}"
     enabled: "{{ docker_service_enabled }}"
-
