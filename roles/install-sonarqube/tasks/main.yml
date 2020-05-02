@@ -22,7 +22,7 @@
 
         cmd: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-6.7.6.zip
 
-        chdir: tmp/
+        chdir: /tmp
 
     - name: Unzip sonarqube binary
 
@@ -30,7 +30,7 @@
 
         cmd: unzip sonarqube-6.7.6.zip
 
-        chdir: tmp/
+        chdir: /tmp
 
     - name: Move unzipped sonarqube to /opt
 
@@ -38,7 +38,7 @@
 
         cmd: mv sonarqube-6.7.6 /opt
 
-        chdir: tmp/
+        chdir: /tmp
 
     - name: start sonar
 
@@ -46,4 +46,4 @@
 
         cmd: ./sonar.sh start
 
-        chdir: opt/sonarqube-6.7.6/bin/linux-x86-64/
+        chdir: /opt/sonarqube-6.7.6/bin/linux-x86-64
