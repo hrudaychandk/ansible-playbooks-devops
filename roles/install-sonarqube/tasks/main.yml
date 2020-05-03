@@ -23,7 +23,7 @@
       command: mv sonarqube-6.7.6 /opt    
       args:
         chdir: /tmp
-        creates: /tmp/sonarqube-6.7.6
+        creates: /opt/sonarqube-6.7.6
         
     - name: start sonar
       become: yes
