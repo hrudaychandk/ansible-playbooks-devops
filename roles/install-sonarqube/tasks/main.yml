@@ -17,12 +17,12 @@
         chdir: /tmp
         creates: /opt/sonarqube-6.7.6
 
-  - name: changing ownership
-    file:
-      path: /opt/sonarqube-6.7.6
-      owner: "ubuntu"
-      group: "ubuntu"
-      mode: 755
+   - name: changing ownership
+     file:
+       path: /opt/sonarqube-6.7.6
+       owner: "ubuntu"
+       group: "ubuntu"
+       mode: 755
       
     - name: start sonar
       become: yes
