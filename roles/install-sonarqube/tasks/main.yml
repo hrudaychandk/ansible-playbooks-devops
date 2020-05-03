@@ -15,32 +15,17 @@
         name: unzip
 
         state: latest
-
-    - name: Download sonarqube binary
-
-      shell:
-
-        cmd: wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-6.7.6.zip
-
-        chdir: /tmp
-
-    - name: Unzip sonarqube binary
-
-      shell:
-
-        cmd: unzip sonarqube-6.7.6.zip
-
-        chdir: /tmp
-
-    - name: Move unzipped sonarqube to /opt
-
-      command: mv sonarqube-6.7.6 /opt
+        
+    - name: Download and unarchive sonarqube binary
+    
+      unarchive:
       
-      args:
-
-        chdir: /tmp
-        creates: /tmp/sonarqube-6.7.6
-
+        src: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-6.7.6.zip
+        
+        dest: /tmp
+        
+        remote_src: yes
+    
     - name: start sonar
 
       shell:
