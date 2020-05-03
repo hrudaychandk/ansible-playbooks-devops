@@ -22,7 +22,8 @@
         path: /opt/sonarqube-6.7.6
         owner: "ubuntu"
         group: "ubuntu"
-        mode: 755
+        state: directory
+        mode: '0755'
       
     - name: start sonar
       become: yes
