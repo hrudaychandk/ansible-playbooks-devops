@@ -7,14 +7,6 @@
         pkg: default-jdk
 
         state: present  
-
-    - name: Install unzip
-
-      package:
-
-        name: unzip
-
-        state: latest
         
     - name: Download and unarchive sonarqube binary
     
@@ -27,7 +19,8 @@
         remote_src: yes
     
     - name: start sonar
-
+      become: yes
+      become_user: ubuntu
       shell:
 
         cmd: ./sonar.sh start
