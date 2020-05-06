@@ -1,6 +1,3 @@
-- hosts: all
-  become: yes
-  become_user: root
   tasks:
   - name: install the dependency
     command: sudo apt install -y autoconf bc gawk dc build-essential gcc libc6 m ake wget unzip apache2 php libapache2-mod-php7.2 libgd-dev libmcrypt-dev make li bssl-dev snmp libnet-snmp-perl gettext
