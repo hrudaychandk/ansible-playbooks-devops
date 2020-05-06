@@ -1,2 +1,50 @@
----
-# tasks file for install-nagios
+- hosts: all
+  become: yes
+  become_user: root
+  tasks:
+  - name: install the dependency
+    command: sudo apt install -y autoconf bc gawk dc build-essential gcc libc6 m ake wget unzip apache2 php libapache2-mod-php7.2 libgd-dev libmcrypt-dev make li bssl-dev snmp libnet-snmp-perl gettext
+  - name: download nagios tar file
+    get_url:
+      url:https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.5.t ar.gz
+      dest: /home/ubuntu
+  - name: unzip the file
+    command: tar -xzf nagioscore-nagios-4.4.5.tar.gz
+  - name: configure nagios
+    command: ./configure --with-httpd-conf=/etc/apache2/sites-enabled
+    args:
+      chdir: /home/ubuntu/nagioscore-nagios-4.4.5
+  - name: run make command
+    command: sudo make all
+    args:
+      chdir: /home/ubuntu/nagioscore-nagios-4.4.5
+  - name: run make install command
+    command: sudo make install
+    args:
+      chdir: /home/ubuntu/nagioscore-nagios-4.4.5
+  - name: run comman
+    command: sudo make install-daemoninit
+    args:
+      chdir: /home/ubuntu/nagioscore-nagios-4.4.5
+  - name: run command
+    command: sudo make install-commandmode
+    args:
+      chdir: /home/ubuntu/nagioscore-nagios-4.4.5
+  - name: run command
+    command: sudo make install-config
+    args:
+      chdir: /home/ubuntu/nagioscore-nagios-4.4.5
+  - name: run command
+    command: sudo make install-webconf
+    args:
+      chdir: /home/ubuntu/nagioscore-nagios-4.4.5
+  - name: run command
+    command: sudo a2enmod rewrite cgi
+    args:
+      chdir: /home/ubuntu/nagioscore-nagios-4.4.5
+  - name: restart the apache2 service
+    service:
+      name: apache2
+      state: restarted
+  - name: install NRPE
+    command: sudo apt install -y nagios-plugins nagios-nrpe-plugin
