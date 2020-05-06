@@ -1,11 +1,10 @@
   - name: install the dependency
     command: sudo apt install -y autoconf bc gawk dc build-essential gcc libc6 m ake wget unzip apache2 php libapache2-mod-php7.2 libgd-dev libmcrypt-dev make li bssl-dev snmp libnet-snmp-perl gettext
-  - name: download nagios tar file
-    get_url:
-      url: https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.5.tar.gz
-      dest: /home/ubuntu
-  - name: unzip the file
-    command: tar -xzf nagioscore-nagios-4.4.5.tar.gz
+  - name: Download and unarchive nagios tar file  
+    unarchive:      
+      src: https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.5.tar.gz       
+      dest: /home/ubuntu     
+      remote_src: yes
   - name: configure nagios
     command: ./configure --with-httpd-conf=/etc/apache2/sites-enabled
     args:
